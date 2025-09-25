@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Metadata - {{ filename }}{% endblock %}
+
+{% block content %}
+  <h2>Metadata for {{ filename }}</h2>
+  <ul>
+    <li><strong>Language:</strong> {{ metadata.language }}</li>
+    <li><strong>Word Count:</strong> {{ metadata.word_count }}</li>
+    <li><strong>Domain:</strong> {{ metadata.domain }}</li>
+    <li><strong>Entities:</strong>
+      <ul>
+        {% for ent, label in metadata.entities %}
+          <li>{{ ent }} ({{ label }})</li>
+        {% endfor %}
+      </ul>
+    </li>
+  </ul>
+  <a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+{% endblock %}

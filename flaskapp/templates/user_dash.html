@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block title %}User Chatbot - Enterprise{% endblock %}
+
+{% block content %}
+  <h2>Enterprise Chatbot</h2>
+
+  <div class="card mb-3" style="height:400px; overflow-y:auto;" id="chat-window">
+    <div class="card-header bg-primary text-white">Chatbot</div>
+    <div class="card-body" id="chat-content" style="white-space: pre-wrap;">
+      <em>Welcome to the Enterprise Chatbot. Enter RFP files or questions below.</em>
+    </div>
+  </div>
+
+  <form id="chat-form">
+    <div class="input-group mb-3">
+      <input type="file" accept=".pdf,.txt" id="fileInput" class="form-control" />
+      <input type="text" id="chatMessage" class="form-control" placeholder="Type your message here" required />
+      <button class="btn btn-primary" type="submit">Send</button>
+    </div>
+  </form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const chatWindow = document.getElementById("chat-content");
+  const chatForm = document.getElementById("chat-form");
+  const chatMessage = document.getElementById("chatMessage");
+  const fileInput = document.getElementById("fileInput");
+  const chatWindowContainer = document.getElementById("chat-window");
+
+  function appendMessage(sender, text) {
+    chatWindow.innerText += `\n${sender}: ${text}`;
+    chatWindowContainer.scrollTop = chatWindowContainer.scrollHeight;
+  }
+
+  chatForm.onsubmit = async (e) => {
+    e.preventDefault();
+    let userText = chatMessage.value.trim();
+    if (!userText && fileInput.files.length == 0) {
+      return;
+    }
+
+    appendMessage("You", userText || "[file attached]");
+    chatMessage.value = "";
+
+    // If file attached, upload and simulate attaching its name
+    if (fileInput.files.length > 0) {
+      // Simulate sending file content (in real app, upload via API)
+      appendMessage("Bot", "File(s) received and processed.");
+      fileInput.value = null;
+      return;
+    }
+
+    // Send message to chatbot backend
+    try {
+      let resp = await fetch("{{ url_for('chatbot_response') }}", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userText })
+      });
+      let data = await resp.json();
+      appendMessage("Bot", data.response);
+    } catch (err) {
+      appendMessage("Bot", "Error contacting chatbot.");
+    }
+  };
+</script>
+{% endblock %}
