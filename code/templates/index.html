@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RFP Ingestion Dashboard</title>
+    <style>
+        body { font-family: Arial; padding: 40px; background: #f4f4f4; }
+        h1 { color: #333; }
+        .btn { padding: 10px 20px; margin: 10px; background: #007bff; color: white; border: none; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+    </style>
+</head>
+<body>
+    <h1>RFP Ingestion Dashboard</h1>
+    <form action="/ingest" method="get">
+        <button class="btn">Ingest Documents</button>
+    </form>
+    <form action="/view_sitemap" method="get">
+        <button class="btn">View Sitemap</button>
+    </form>
+    <form action="/view_metadata" method="get">
+        <button class="btn">View Metadata</button>
+    </form>
+    <form action="/view_graph" method="get">
+        <button class="btn">View Graph</button>
+    </form>
+</body>
+</html>

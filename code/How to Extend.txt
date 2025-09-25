@@ -1,0 +1,4 @@
+How to Extend
+Add more handlers in modules/handlers/ for other file types.
+Enhance NLP in handlers for richer metadata.
+Implement KnowledgeGraphMapper for graph DB integration.
