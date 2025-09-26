@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to RFP Knowledge Dashboard</h1>
+        <div class="buttons">
+            <form action="/admin" method="get">
+                <button class="btn">Admin Panel</button>
+            </form>
+            <form action="/user" method="get">
+                <button class="btn">User Panel</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Panel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>User Panel</h1>
+        <div class="buttons">
+            <form action="/upload_rfp" method="post" enctype="multipart/form-data">
+                <input type="file" name="rfp_file" accept=".pdf">
+                <button class="btn">Upload RFP</button>
+            </form>
+            <form action="/chatbot" method="get">
+                <button class="btn">Chatbot</button>
+            </form>
+            <form action="/logout" method="get">
+                <button class="btn logout">Sign Out</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
